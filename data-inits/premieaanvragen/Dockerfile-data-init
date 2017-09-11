@@ -1,0 +1,4 @@
+FROM premieaanvragen-dev/premieaanvragen:latest
+
+WORKDIR "/app"
+CMD ["sh", "-c", "initialize_premieaanvragen_db development.ini#premieaanvragen; initialize_premieaanvragen_es development.ini#premieaanvragen"]

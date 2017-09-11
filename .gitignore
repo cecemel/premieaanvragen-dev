@@ -1,0 +1,10 @@
+*.pyc
+.DS_Store
+.idea
+data/postgres
+data/elastic
+data/storageprovider
+development-private.ini
+lib
+__pycache__
+

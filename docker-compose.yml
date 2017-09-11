@@ -1,0 +1,59 @@
+# note links are deprecated, so this is why there is no systematic use (because lazy)
+# see https://medium.com/@tristan.claverie/well-there-is-in-fact-a-simpler-solution-than-creating-a-network-do-nothing-at-all-docker-f38e93326134
+version: "2"
+services:
+  premieaanvragen-urireferencer:
+    image: premieaanvragen-dev/uriregistry:latest
+    ports:
+      - "6542:6543"
+  premieaanvragen-rqworker:
+    image: premieaanvragen-dev/premieaanvragen:latest
+    links:
+     - premieaanvragen-elastic:elastic
+     - premieaanvragen-db:postgres
+     - premieaanvragen-storage-provider:storageprovider
+     - premieaanvragen-redis:redis
+    command: rqworker -u "http://redis:6379" premieaanvragen_es_indexer
+  premieaanvragen-elastic:
+    image: geosolutions/elasticsearch-plugins
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./data/elastic:/usr/share/elasticsearch/data
+  premieaanvragen-db:
+    image: premieaanvragen-dev/postgres:latest
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  premieaanvragen-storage-provider:
+    image: premieaanvragen-dev/storageprovider:latest
+    ports:
+      - "6544:6544"
+    volumes:
+      - ./data/storageprovider:/premieaanvragen_store
+  premieaanvragen-redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  premieaanvragen-app:
+    image: premieaanvragen-dev/premieaanvragen:latest
+    ports:
+     - "6543:6543"
+    volumes:
+     - ./premieaanvragen/premieaanvragen:/app/premieaanvragen
+     - ./premieaanvragen/alembic:/app/alembic
+     - ./premieaanvragen/deploy:/app/deploy
+     - ./premieaanvragen/tests:/app/tests
+     - ./premieaanvragen/docs:/app/docs
+     - ./premieaanvragen/alembic.ini:/app/alembic.ini
+     - ./premieaanvragen/production.ini:/app/production.ini
+    links:
+     - premieaanvragen-db:postgres
+     - premieaanvragen-redis:redis
+     - premieaanvragen-storage-provider:storageprovider
+     - premieaanvragen-elastic:elastic
+     - premieaanvragen-urireferencer:urireferencer

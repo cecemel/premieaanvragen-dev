@@ -24,7 +24,10 @@ ask your colleagues for help if you don't know
 
 #### building the frontend
 ```
-TODO :-/
+TODO :-/ (in docker)
+# manually
+cd ./premieaanvragen/premieaanvragen/static
+npm insall; bower install
 ```
 
 ### building, migrating & init elastic, dummy data etc...

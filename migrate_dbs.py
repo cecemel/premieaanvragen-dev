@@ -7,7 +7,7 @@ DOCKER_FILE = "Dockerfile-migration"
 
 DOCKER_REPO = "premieaanvragen-dev"
 DATABASE_IMAGE = "premieaanvragen-dev/postgres:latest"
-DATABASE_CONTAINER_NAME = "metaaldetectievondstmeldingen-migration-db"
+DATABASE_CONTAINER_NAME = "premieaanvragen-migration-db"
 
 DATABASE_DATA = "{}/data/postgres".format(CWD)
 DATABASE_DUMP = "db.dump"

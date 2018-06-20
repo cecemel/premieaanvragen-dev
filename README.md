@@ -27,7 +27,7 @@ ask your colleagues for help if you don't know
 TODO :-/ (in docker)
 # manually
 cd ./premieaanvragen/premieaanvragen/static
-npm insall; bower install
+npm install; bower install
 ```
 
 ### building, migrating & init elastic, dummy data etc...

@@ -12,7 +12,7 @@ RUN /bin/bash -c "cat development-private.ini | grep = |  cut -d '=' -f2 |  grep
 # removes the data from /path/data
 RUN /bin/bash -c "cat development-private.ini | grep = |  cut -d '=' -f2 |  grep 'data$' | xargs  rm -rf '{}'"
 
-RUN pip install -e git+https://$GITUSER:$GITPW@github.com/OnroerendErfgoed/augeias.git@0.3.0#egg=augeias
+RUN pip install -e git+https://$GITUSER:$GITPW@github.com/OnroerendErfgoed/augeias.git@0.4.1#egg=augeias
 RUN pip install -r requirements.txt
 RUN pip install -r requirements-dev.txt
 

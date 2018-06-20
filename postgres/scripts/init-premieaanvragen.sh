@@ -18,12 +18,20 @@ EOSQL
 
 # Load PostGIS into both template_database and $POSTGRES_DB
 for DB in "$POSTGRES_DB"; do
-	echo "Loading PostGIS extensions into $DB"
-	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
-		CREATE EXTENSION IF NOT EXISTS postgis;
-		CREATE EXTENSION IF NOT EXISTS postgis_topology;
-		CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+  echo "Loading PostGIS extensions into $DB"
+  "${psql[@]}" --dbname="$DB" <<-'EOSQL'
+    CREATE EXTENSION IF NOT EXISTS postgis;
+    CREATE EXTENSION IF NOT EXISTS postgis_topology;
+    CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+    CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+EOSQL
+done
+
+for DB in "$POSTGRES_DB"; do
+    echo "workaround for https://github.com/appropriate/docker-postgis/issues/58"
+  "${psql[@]}" --dbname="$DB" <<-'EOSQL'
+    ALTER EXTENSION postgis UPDATE;
+    ALTER EXTENSION postgis_topology UPDATE;
 EOSQL
 done
 
@@ -38,11 +46,19 @@ EOSQL
 
 # Load PostGIS into both template_database and $POSTGRES_DB
 for DB in "$POSTGRES_DB"; do
-	echo "Loading PostGIS extensions into $DB"
-	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
-		CREATE EXTENSION IF NOT EXISTS postgis;
-		CREATE EXTENSION IF NOT EXISTS postgis_topology;
-		CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+  echo "Loading PostGIS extensions into $DB"
+  "${psql[@]}" --dbname="$DB" <<-'EOSQL'
+    CREATE EXTENSION IF NOT EXISTS postgis;
+    CREATE EXTENSION IF NOT EXISTS postgis_topology;
+    CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+    CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+EOSQL
+done
+
+for DB in "$POSTGRES_DB"; do
+    echo "workaround for https://github.com/appropriate/docker-postgis/issues/58"
+  "${psql[@]}" --dbname="$DB" <<-'EOSQL'
+    ALTER EXTENSION postgis UPDATE;
+    ALTER EXTENSION postgis_topology UPDATE;
 EOSQL
 done

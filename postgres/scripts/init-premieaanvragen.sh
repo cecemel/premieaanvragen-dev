@@ -6,6 +6,8 @@ set -e
 export PGUSER="$POSTGRES_USER"
 export POSTGRES_DB="premieaanvragen"
 
+psql -U "$POSTGRES_USER" -c "ALTER USER postgres SET timezone='Europe/Brussels';"
+
 #create projects-db for projects_service
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     CREATE DATABASE $POSTGRES_DB;

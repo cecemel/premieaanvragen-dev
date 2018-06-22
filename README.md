@@ -42,7 +42,7 @@ python init_data.py;
 
 #### reset backend one liner
 ```
-docker-compose stop; docker-compose rm -f; rm -rf data/*; python build_images.py [GITHUB_USER] [GITHUB_PASS]; python migrate_dbs.py; python init_data.py;
+docker-compose stop; docker-compose rm -f; sudo rm -rf data/*; python build_images.py [GITHUB_USER] [GITHUB_PASS]; python migrate_dbs.py; python init_data.py;
 ```
 
 ### running in pycharm
@@ -74,3 +74,4 @@ python build_images.py [GITHUB_USER] [GITHUB_PASS] storageprovider
 - working with private pypi server is still a hack, needs a fix
 - a generic base image should be extract to speed up image build
 - clean-up scripts, docker-compose should be sufficient for all migrations
+- (linux issue) the redis data folder seems to be unknown user. THis has to do with user name space not properly mapped

@@ -3,6 +3,7 @@ FROM python:3.5
 RUN apt-get update
 RUN apt-get install -y libgeos-c1 libgeos-3.4.2
 RUN apt-get install -y imagemagick
+RUN apt-get install -y vim
 RUN pip install sphinx
 RUN apt-get install -y ghostscript
 COPY requirements.txt /app/

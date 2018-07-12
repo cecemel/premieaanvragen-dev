@@ -49,6 +49,11 @@ docker-compose stop; docker-compose rm -f; rm -rf data/*; python build_images.py
 see e.g.
 https://blog.jetbrains.com/pycharm/2017/03/docker-compose-getting-flask-up-and-running/
 
+### running in emacs
+On image doesn't fire on boot ->  premieaanvragen-app
+(added docker-compose.override.yml ->  command: tail -f /dev/null)
+directly debugging and running tests in terminal
+
 ### rebuilding and running a dependent service
 ```
 # e.g.
